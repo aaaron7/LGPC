@@ -127,3 +127,24 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+third_party/Galahad/attachments/P020170825528433386082.doc
+third_party/Galahad/attachments/P020161104523616972397.doc
+third_party/Galahad/attachments/P020170630791973620281.doc
+third_party/Galahad/attachments/P020171110518246692755.xls
+third_party/Galahad/attachments/P020171110603624816071.xls
+third_party/Galahad/attachments/P020171110604846227402.xls
+third_party/Galahad/attachments/P020171110604846371266.xls
+third_party/Galahad/attachments/W020160311586719021904.doc
+third_party/Galahad/attachments/W020171110566163090567.xls
+third_party/Galahad/attachments/W020171110566750912342.xls
+third_party/Galahad/csrc_handler.py
+third_party/Galahad/data/create_table.sql
+third_party/Galahad/data/main.db
+third_party/Galahad/downloader.py
+third_party/Galahad/draft.graffle
+third_party/Galahad/driver_result.html
+third_party/Galahad/global_def.py
+third_party/Galahad/proc_task.py
+third_party/Galahad/result.html
+third_party/Galahad/result.txt
+third_party/Galahad/store.py
