@@ -4,3 +4,6 @@ class Status:
         self.code = code
         self.msg = msg
     
+
+def OkStatus():
+    return Status()
