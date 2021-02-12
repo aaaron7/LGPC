@@ -5,7 +5,7 @@
 import sys
 import json
 import os
-from os import listdir
+from os import listdir, stat
 from os.path import isfile, join
 import requests
 import time
@@ -14,68 +14,39 @@ import json
 import urllib
 from bs4 import BeautifulSoup
 from LGPC.downloader import downloader
-from LGPC.utils import packet
-class RuleContext:
-    def __init__(self):
-        self.streams = {}
-        pass
-    
-    def add_packet(packet, name):
-        if self.streams[name] is None:
-            self.streams[name] = []
-        self.streams[name].append(packet)
-        
-
-    def get_input(self, index):
-        pass
-
-    def write_output(self, index, packet):
-        pass
-
-class Rule:
-    def __init__(self, input_names, output_names):
-        self.input_names = input_names
-        self.output_names = output_names
-
-    @staticmethod
-    def name():
-        return "DefaultParserRule"
-
-    def prepare(self, rule_context):
-        pass
-
-    def process(self, rule_context):
-        pass
-
-    def close(self, rule_context):
-        pass
+from LGPC.utils import packet, status
+from LGPC.parser import rule
 
 class Parser:
     """
-    GPUImage-like rules execution engine. 
+    mediapipe-like dag architure.
 
-    Why not use mediapipe-like DAG arch? 
-    Config-driven may bring additional work, pros side is it looks much clear along with some of complex graph structure, but we don't have such scenario in this project. 
-
-    So, we simply use GPUImage style pipeline, and make the pipeline building process more readable by functional techniques.
-
+    why don't we just use simple gpuimage pipeline? because i want a Rule can receive and produce multiply inputs and outputs.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.rules = []
-        self.context = RuleContext()
+        self.context = rule.RuleContext()
 
-    def add_rule(self, rule):
-        self.rules.append(rule)
+    def add_rule(self, rule : rule.Rule, rule_config: rule.RuleConfig) -> status.Status:
+        self.rules.append((rule, rule_config))
 
-    def remove_rule(self, rule):
-        self.rules.remove(rule)
+    def remove_rule(self, rule) -> status.Status:
+        self.rules = [x for x in self.rules if x[0] != rule]
 
-    def send_packet(self, packet, name):
-        self.context.add_packet(packet, name)
+    def send_packet(self, packet, stream_name) -> status.Status:
+        self.context.add_packet(packet, stream_name)
         pass 
-    
+
+    def notify_rule_run(self, input_stream_name) -> status.Status:
+        for rule,config in self.rules:
+            if config.input_names.contains(input_stream_name):
+                rule.process(self.context, config)
+
+        self.context.pop_packet(input_stream_name)
     
 
 if __name__ == "__main__":
+
+
     pass

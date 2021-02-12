@@ -3,12 +3,12 @@
 # date: "2021-01-31"
 
 import sys
-# sys.path.append("C:\\Users\\appri\\Documents\\GitHub\\LGPC")
 import json
 import os
 from os import listdir
 from os.path import isfile, join
 import requests
+
 import time
 import random
 import json
@@ -17,7 +17,6 @@ import threading
 from selenium import webdriver
 from LGPC.utils import status
 from fn import F,_
-
 
 class Downloader:
     def __init__(self):

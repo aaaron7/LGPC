@@ -1,0 +1,4 @@
+fn
+selenium
+requests
+bs4
