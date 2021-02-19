@@ -16,6 +16,7 @@ from bs4 import BeautifulSoup
 from LGPC.downloader import downloader
 from LGPC.utils import packet, status
 from LGPC.parser import rule
+from LGPC.parser.rules import  db_movie_rule 
 
 class Parser:
     """
@@ -45,8 +46,22 @@ class Parser:
 
         self.context.pop_packet(input_stream_name)
     
+    
+    
 
 if __name__ == "__main__":
 
+    p = Parser()
+    db_rule = db_movie_rule.DBMovieRule()
+    rule_config = rule.RuleConfig("db_movie", ["page_source"],["movies"])
+    p.add_rule(rule, rule_config)
 
+
+    def get_content(source):
+        p.send_packet(packet.Packet(source), "page_source")
+
+    ld = downloader.SeleDownloader()
+    test_url = "https://movie.douban.com/tv/#!type=tv&tag=%E5%9B%BD%E4%BA%A7%E5%89%A7&sort=recommend&page_limit=20&page_start=0"
+    req = downloader.Request(test_url, get_content)
+    ld.start_download(req)
     pass

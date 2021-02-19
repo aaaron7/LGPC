@@ -26,6 +26,7 @@ class DBMovieRule(rule.Rule):
         if not packet.can_get_type(type(string)):
             return status.ParameterInvalidStatus()
         page_source = packet.payload()
+        print(page_source)
         # if page_source
         return status.OkStatus()
 

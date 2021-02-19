@@ -1,5 +1,3 @@
-from os import initgroups, stat
-
 # author:aaron
 # filename:rule.py
 # date: "2021-02-08"
@@ -22,7 +20,7 @@ class RuleContext:
         pass
     
     def add_packet(self, packet, stream_name) -> None:
-        if self.streams[stream_name] is None:
+        if stream_name not in self.streams:
             self.streams[stream_name] = []
         self.streams[stream_name].append(packet)
     
